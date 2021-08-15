@@ -1,17 +1,18 @@
-from collections import deque
-
 class Solution:
     def canArrange(self, arr: List[int], k: int) -> bool:
-        counter = deque([0] * k)
+        counter = [0] * k
         for num in arr:
             counter[num % k] += 1
 
-        counter.popleft()
-        while len(counter) > 1:
-            if counter.popleft() != counter.pop():
-                return False
-        
-        if len(counter) == 1 and counter.pop() % 2:
-            return False
+        l, r = 1, len(counter) - 1
+        while l <= r:
+            if l == r:
+                return counter[l] % 2 == 0
 
+            if counter[l] != counter[r]:
+                return False
+         
+            l -= 1
+            r -= 1
+            
         return True
