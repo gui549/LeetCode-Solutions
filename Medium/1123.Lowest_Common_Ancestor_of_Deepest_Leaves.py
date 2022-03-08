@@ -9,18 +9,18 @@ class TreeNode:
 
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        que = deque([(root, 0)])
-        ans, max_depth = root, 0
-        while que:
-            node, depth = que.pop()
-            if node.left or node.right:
-                if max_depth < depth:
-                    ans = node
-                    max_depth = depth
-
-            if node.left:
-                que.append((node.left, depth + 1))
-
-            if node.right:
-                que.append((node.))
+        def recursive(node):
+            if not node:
+                return 0, None
             
+            left_depth, left_node = recursive(node.left)
+            right_depth, right_node = recursive(node.right)
+            
+            if left_depth > right_depth: 
+                return left_depth + 1, left_node
+            
+            if left_depth < right_depth:
+                return right_depth + 1, right_node
+
+            return left_depth + 1, node
+        return recursive(root)[1]
