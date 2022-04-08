@@ -1,15 +1,8 @@
-from itertools import permutations
 from typing import List
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        def recursion(curr, candidates):
-            if not candidates:
-                ans.append(curr)
-            
-            for i in range(len(candidates)):
-                recursion(curr + [candidates[i]], candidates[:i] + candidates[i+1:])
+        if not nums:
+            return [[]]
 
-        recursion([], nums)
-        return ans
+        return [[nums[i]] + comb for i in range(len(nums)) for comb in self.permute(nums[:i] + nums[i + 1:])]
