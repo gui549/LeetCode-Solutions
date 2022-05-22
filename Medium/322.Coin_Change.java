@@ -11,6 +11,7 @@ class Solution {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, Integer.MAX_VALUE);        
         dp[0] = 0;
+
         for (int i = 0; i < amount + 1; i++) {
             if (dp[i] == Integer.MAX_VALUE) {
                 continue;
@@ -22,7 +23,7 @@ class Solution {
                 }
             }
         }
-        System.out.println(Arrays.toString(dp));       
+
         return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
     }
 }
